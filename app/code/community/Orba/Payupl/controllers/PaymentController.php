@@ -1,9 +1,21 @@
 <?php
 
-class Orba_Payupl_PaymentController extends Mage_Core_Controller_Front_Action {
-    
+class Orba_Payupl_PaymentController extends Mage_Core_Controller_Front_Action
+{
+
+    /**
+     * @var Mage_Checkout_Model_Session
+     */
     protected $_session = null;
+
+    /**
+     * @var Mage_Sales_Model_Order
+     */
     protected $_order = null;
+
+    /**
+     * @var Mage_Sales_Model_Order_Payment
+     */
     protected $_payment = null;
 
     /* initiates new payment */
@@ -12,7 +24,9 @@ class Orba_Payupl_PaymentController extends Mage_Core_Controller_Front_Action {
         $this->setOrder();
         $this->forceNewOrderStatus();
         $this->setPayment(true);
-        $this->_order->sendNewOrderEmail();
+        if (!$this->_order->getEmailSent() == 1) {
+            $this->_order->sendNewOrderEmail();
+        }
         $this->loadLayout();
         $this->getLayout()->getBlock('payupl_child')->setOrder($this->_order);
         $this->renderLayout();
