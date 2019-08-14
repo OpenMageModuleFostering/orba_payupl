@@ -77,23 +77,23 @@ class Orba_Payupl_PaymentController extends Mage_Core_Controller_Front_Action {
         $this->renderLayout();
     }
     
-    private function setSession() {
+    protected function setSession() {
         $this->_session = Mage::getSingleton('checkout/session');
         $this->_session->setQuoteId($this->_session->getPayuplQuoteId(true));
     }
     
-    private function setOrder() {
+    protected function setOrder() {
         $id = $this->_session->getLastRealOrderId();
         $this->_order = Mage::getModel('sales/order')->loadByIncrementId($id);
     }
     
-    private function getPaymentSidFromResponse() {
+    protected function getPaymentSidFromResponse() {
         $params = $this->getRequest()->getParams();
         $session = explode('-', $params['sid']);
         return $session[0];
     }
     
-    private function checkOrder($payment_sid = null) {
+    protected function checkOrder($payment_sid = null) {
         $customer_id = $this->_order->getData('customer_id');
         $session_customer_id = Mage::getSingleton('customer/session')->getData('id');
         $sid = Mage::getModel("core/session")->getEncryptedSessionId();
@@ -109,7 +109,7 @@ class Orba_Payupl_PaymentController extends Mage_Core_Controller_Front_Action {
         }
     }
     
-    private function setPayment($is_order_new = false) {
+    protected function setPayment($is_order_new = false) {
         $this->_payment = $this->_order->getPayment();
         if ($is_order_new) {
             $this->_payment->setAdditionalInformation('payupl_customer_sid', Mage::getModel("core/session")->getEncryptedSessionId());
@@ -117,11 +117,11 @@ class Orba_Payupl_PaymentController extends Mage_Core_Controller_Front_Action {
         }
     }
     
-    private function isNewOrder() {
+    protected function isNewOrder() {
         return (Mage::getSingleton('checkout/session')->getLastRealOrderId() == $this->_order->getRealOrderId());
     }
     
-    private function forceNewOrderStatus() {
+    protected function forceNewOrderStatus() {
         if ($this->isNewOrder()) {
             $status = $this->_order->getStatus();
             $state = $this->_order->getState();
