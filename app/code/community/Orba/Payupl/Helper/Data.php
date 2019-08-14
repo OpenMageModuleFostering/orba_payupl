@@ -12,7 +12,11 @@ class Orba_Payupl_Helper_Data extends Mage_Core_Helper_Abstract {
         $adapter->setConfig(array(
             'curloptions' => array(
                 CURLOPT_SSLVERSION => 1,
-                CURLOPT_SSL_CIPHER_LIST => 'TLSv1',
+                // our experience shows that Payu doesn't need this option
+                // older versions of CURL don't understand it
+                // hence it's commented
+                // 
+                // CURLOPT_SSL_CIPHER_LIST => 'TLSv1',
                 CURLOPT_SSL_VERIFYHOST => 2,
                 CURLOPT_SSL_VERIFYPEER => false
             )
