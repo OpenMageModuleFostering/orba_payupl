@@ -1,16 +1,19 @@
 {
-    "name": "OpenMageModuleFostering/Orba_Payupl",
+    "name": "OpenMageModuleFostering\/Orba_Payupl",
     "type": "magento-module",
     "license": "Academic-Free-License-(AFL)",
     "homepage": "",
-    "description": "Payu.pl integration / Integracja Payu.pl",
+    "description": "Payu.pl integration \/ Integracja Payu.pl",
     "authors": [
-    {
-        "name": "ORBA",
-        "email": "magento@orba.co"
-    }
-],
+        {
+            "name": "ORBA",
+            "email": "magento@orba.co"
+        }
+    ],
     "suggest": {
-        "magento-hackathon/magento-composer-installer": "*"
-    }
+        "magento-hackathon\/magento-composer-installer": "*"
+    },
+    "keywords": [
+        "openmage-module"
+    ]
 }
